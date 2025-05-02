@@ -1,0 +1,25 @@
+.mpin-input {
+    margin-top: 16px;
+  }
+  
+  .mpin-input label {
+    display: block;
+    font-weight: bold;
+  }
+  
+  .mpin-input input {
+    margin-top: 4px;
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+  }
+  
+  .mpin-input button {
+    margin-left: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+  }
+  .mpin-input button:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+  

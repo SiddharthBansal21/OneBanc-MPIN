@@ -1,0 +1,28 @@
+/* src/components/TestCaseList.css */
+
+.test-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.test-table th,
+.test-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  vertical-align: top;
+  text-align: left;
+}
+
+.test-table tr.pass {
+  background-color: #e6ffed;
+}
+
+.test-table tr.fail {
+  background-color: #ffe6e6;
+}
+
+.test-table ul {
+  margin: 4px 0;
+  padding-left: 16px;
+}

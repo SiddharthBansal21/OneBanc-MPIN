@@ -1,0 +1,13 @@
+/* src/components/MPINSelector.css */
+.mpin-selector {
+    margin-top: 16px;
+  }
+  
+  .mpin-selector__label {
+    font-weight: bold;
+  }
+  
+  .mpin-selector__options {
+    margin-top: 4px;
+  }
+  

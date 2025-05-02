@@ -1,132 +1,54 @@
-# MPIN Strength Checker
+# React + TypeScript + Vite
 
-A **React + TypeScript** demo app that evaluates the strength of user-supplied MPINs based on common-usage patterns and user demographics (Date of Birth, Anniversary, Spouse’s DOB), including “cross-date” combinations. It includes an automated test suite with 20+ scenarios to prove correctness.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
----
+Currently, two official plugins are available:
 
-## 🔍 Features
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-1. **Live Mode** (`/live` route)  
-   - Enter three dates (DOB, Anniversary, Spouse DOB)  
-   - Choose MPIN length (4 or 6 digits)  
-   - Enter MPIN and see:
-     - **Weak** (red) or **Strong** (green)
-     - Reasons for weakness:
-       - `COMMONLY_USED`
-       - `DEMOGRAPHIC_DOB_SELF`, `DEMOGRAPHIC_DOB_SPOUSE`, `DEMOGRAPHIC_ANNIVERSARY`
-       - `DEMOGRAPHIC_CROSS_DATES_*` for 4-digit mixed-date patterns
+## Expanding the ESLint configuration
 
-2. **Test Mode** (`/test` route)  
-   - Runs 20+ predefined test cases  
-   - Displays a table of **Scenario**, **Inputs**, **Expected vs Actual**, **PASS/FAIL**  
-   - Green rows = passed; red rows = failed
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
----
-
-## 🏗️ Project Structure
-
-```
-mpin-demo/
-├── public/
-│   └── index.html
-├── src/
-│   ├── App.tsx           
-│   ├── index.css         
-│   ├── main.tsx          
-│   ├── components/       
-│   │   ├── DemographicsForm.tsx / .css
-│   │   ├── MPINSelector.tsx      / .css
-│   │   ├── MPINInput.tsx         / .css
-│   │   └── TestCaseList.tsx      / .css
-│   ├── routes/
-│   │   ├── Live.tsx       
-│   │   └── Test.tsx       
-│   └── utils/
-│       ├── mpinEvaluator.ts      
-│       └── testCases.ts          
-├── README.md
-├── package.json
-├── tsconfig.json
-└── vite.config.ts
+```js
+export default tseslint.config({
+  extends: [
+    // Remove ...tseslint.configs.recommended and replace with this
+    ...tseslint.configs.recommendedTypeChecked,
+    // Alternatively, use this for stricter rules
+    ...tseslint.configs.strictTypeChecked,
+    // Optionally, add this for stylistic rules
+    ...tseslint.configs.stylisticTypeChecked,
+  ],
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
 ```
 
----
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-## ▶️ Getting Started
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-### Prerequisites
-
-- Node.js 16+ & npm  
-- VS Code (or your preferred editor)
-
-### Installation
-
-```bash
-git clone https://github.com/yourusername/mpin-demo.git
-cd mpin-demo
-npm install
+export default tseslint.config({
+  plugins: {
+    // Add the react-x and react-dom plugins
+    'react-x': reactX,
+    'react-dom': reactDom,
+  },
+  rules: {
+    // other rules...
+    // Enable its recommended typescript rules
+    ...reactX.configs['recommended-typescript'].rules,
+    ...reactDom.configs.recommended.rules,
+  },
+})
 ```
-
-### Development
-
-```bash
-npm run dev
-```
-
-Open http://localhost:5173 and navigate to **Live** or **Test** via the top nav.
-
-### Build & Preview
-
-```bash
-npm run build
-npm run preview
-```
-
----
-
-## 🧩 MPIN Logic Overview
-
-1. **Common-PIN detection**  
-   - Sequential, repeats, keypad patterns, mirror, alternating, double-pairs, special dates, plus extra popular picks.
-
-2. **Demographic patterns**  
-   - From each ISO date (`YYYY-MM-DD`), extract `DD`, `MM`, `YY` segments.  
-   - Generate all six 4-digit combos and six 6-digit permutations.
-
-3. **Cross-date patterns** (4-digit only)  
-   - Mix any 2-digit segment from one date with any 2-digit segment of another.
-
-4. **Strength outcome**  
-   - **Weak** if any rule matches; otherwise **Strong**.
-
----
-
-## ✅ Automated Tests
-
-- 20+ scenarios in `src/utils/testCases.ts`  
-- Covers all rules and edge cases  
-- View results on the **Test** page
-
----
-
-## 🚀 Deployment
-
-Deploy to Vercel:
-
-```bash
-npm install -g vercel
-vercel
-# Build Command: npm run build
-# Output Directory: dist
-vercel --prod
-```
-
----
-
-## 📋 Next Steps
-
-- Add more common-PIN patterns in `mpinEvaluator.ts`  
-- Improve UX/accessibility (ARIA, responsive design)  
-- Add unit tests with Jest or Vitest  
-- Integrate CI for automated testing  
-- Deploy custom domain via Vercel settings  

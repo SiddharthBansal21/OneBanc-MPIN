@@ -1,0 +1,22 @@
+/* src/components/DemographicsForm.css */
+.demo-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .demo-form label {
+    font-weight: bold;
+  }
+  
+  .demo-form input {
+    margin-top: 4px;
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+  }
+  .demo-form label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+  }
+  
