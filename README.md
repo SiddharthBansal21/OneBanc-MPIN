@@ -2,6 +2,7 @@
 
 A **React + TypeScript** demo app that evaluates the strength of user-supplied MPINs based on common-usage patterns and user demographics (Date of Birth, Anniversary, Spouse’s DOB), including “cross-date” combinations. It includes an automated test suite with 20+ scenarios to prove correctness.
 
+
 ---
 
 # HOSTED LINK
@@ -20,18 +21,20 @@ https://onebanc-mpin.vercel.app/
      - Reasons for weakness:
        - `COMMONLY_USED`
        - `DEMOGRAPHIC_DOB_SELF`, `DEMOGRAPHIC_DOB_SPOUSE`, `DEMOGRAPHIC_ANNIVERSARY`
-       - `DEMOGRAPHIC_CROSS_DATES_*` for 4-digit mixed-date patterns  
-
+       - `DEMOGRAPHIC_CROSS_DATES_*` for 4-digit mixed-date patterns
+       
 ![Live Mode Screenshot](./screenshots/live-modes.png)
 
 
 2. **Test Mode** (`/test` route)  
    - Runs 20+ predefined test cases  
    - Displays a table of **Scenario**, **Inputs**, **Expected vs Actual**, **PASS/FAIL**  
-   - Green rows = passed; red rows = failed  
-
+   - Green rows = passed; red rows = failed
+   
+   - Two Test cases failed as they were expected not to be common but they were according to our dataset
+   - Last Two cases are the HAPPY PATH to this assignment i.e. Strong+Demographics.
+  
 ![Test Mode Screenshot](./screenshots/test-mode.png)
-
 ---
 
 ## 🏗️ Project Structure
@@ -39,17 +42,22 @@ https://onebanc-mpin.vercel.app/
 ```
 mpin-demo/
 ├── public/
-│   ├── index.html
-│   └── screenshots/
-│       ├── live-mode.png
-│       └── test-mode.png
+│   └── index.html
 ├── src/
 │   ├── App.tsx           
 │   ├── index.css         
 │   ├── main.tsx          
 │   ├── components/       
+│   │   ├── DemographicsForm.tsx / .css
+│   │   ├── MPINSelector.tsx      / .css
+│   │   ├── MPINInput.tsx         / .css
+│   │   └── TestCaseList.tsx      / .css
 │   ├── routes/
+│   │   ├── Live.tsx       
+│   │   └── Test.tsx       
 │   └── utils/
+│       ├── mpinEvaluator.ts      
+│       └── testCases.ts          
 ├── README.md
 ├── package.json
 ├── tsconfig.json
@@ -60,33 +68,7 @@ mpin-demo/
 
 ## ▶️ Getting Started
 
-### Prerequisites
 
-- Node.js 16+ & npm  
-- VS Code (or your preferred editor)
-
-### Installation
-
-```bash
-git clone https://github.com/yourusername/mpin-demo.git
-cd mpin-demo
-npm install
-```
-
-### Development
-
-```bash
-npm run dev
-```
-
-Open http://localhost:5173 and navigate to **Live** or **Test** via the top nav.
-
-### Build & Preview
-
-```bash
-npm run build
-npm run preview
-```
 
 ---
 
@@ -128,11 +110,3 @@ vercel --prod
 ```
 
 ---
-
-## 📋 Next Steps
-
-- Add more common-PIN patterns in `mpinEvaluator.ts`  
-- Improve UX/accessibility (ARIA, responsive design)  
-- Add unit tests with Jest or Vitest  
-- Integrate CI for automated testing  
-- Deploy custom domain via Vercel settings  
