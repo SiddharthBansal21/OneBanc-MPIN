@@ -22,7 +22,7 @@ https://onebanc-mpin.vercel.app/
        - `DEMOGRAPHIC_DOB_SELF`, `DEMOGRAPHIC_DOB_SPOUSE`, `DEMOGRAPHIC_ANNIVERSARY`
        - `DEMOGRAPHIC_CROSS_DATES_*` for 4-digit mixed-date patterns  
 
-![Live Mode Screenshot](./screenshots/live-mode.png)
+![Live Mode Screenshot](./screenshots/live-modes.png)
 
 
 2. **Test Mode** (`/test` route)  
